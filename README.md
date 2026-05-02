@@ -7,9 +7,9 @@ A specification for 24-bit Planar VRAM ligation, enabling the encapsulation of x
 
 # The full encoding and decoding pipepline for creating 'MASTER_DNA_SEED' PNG files is here:
 
-```md
+
 [pixelator](https://github.com/thatoldfarm/pixelator)
-```
+
 ---
 
 ### **PHASE I: GENESIS - THE 1.44MB SUBSTRATE**
@@ -238,4 +238,9 @@ Our Carrier chips include an embedded **File Allocation Table (FAT)** located at
 
 **The 'chips' are essentially optimized for high-velocity TTY-BONDED execution.**
 
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/thatoldfarm/chromatical-core/blob/main/LICENSE) file for details.
 ---
