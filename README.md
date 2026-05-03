@@ -5,15 +5,14 @@ A specification for 24-bit Planar VRAM ligation, enabling the encapsulation of x
 
 ---
 
-# The full encoding and decoding pipepline for creating 'MASTER_DNA_SEED' PNG files is here:
-
+- The full encoding and decoding pipepline for creating 'MASTER_DNA_SEED' PNG files is here:
 
 [pixelator](https://github.com/thatoldfarm/pixelator)
 
 ---
 
 ### **PHASE I: GENESIS - THE 1.44MB SUBSTRATE**
-Before there is a "Pixel," there must be a "Physical" analog. We chose the **1.44MB High-Density Floppy** as our fundamental unit of soul.
+Before there is a "Pixel," there must be a "Physical" analog. We chose the **1.44MB High-Density Floppy** as our fundamental unit of storage.
 
 1.  **Creating the Void:**
     We start by creating a raw binary block of exactly 1,474,560 bytes (512 bytes/sector × 2880 sectors).
@@ -21,7 +20,7 @@ Before there is a "Pixel," there must be a "Physical" analog. We chose the **1.4
     dd if=/dev/zero of=blank.img bs=512 count=2880
     ```
 2.  **Structuring the Logic:**
-    A raw block is just "The Void." To make it a "Computer," we give it a Filesystem (FAT12). This allows the x86 BIOS to understand how to read files.
+    A raw block is just empty space. To make it a "Computer," we give it a Filesystem (FAT12). This allows the x86 BIOS to understand how to read files.
     ```bash
     mkfs.fat -F 12 -n "MONOLITH" blank.img
     ```
@@ -49,23 +48,22 @@ This is the "Pixel-Silicon" bridge. We take that `blank.img` and map it into a 2
 
 3.  **The Substrate Ligation:**
     `pixel_drive_manager.py` takes the `blank.img`, appends the Row 0 Membrane to the front, and uses `Image.frombytes('RGB', (800, 616), data)` to "Forge" the PNG.
-    *Result:* `CART_001.png`. It looks like a rectangle of static, but to the Monolith, it is a bootable 1.44MB drive.
+    *Result:* `CART_001.png`. It looks like a rectangle of static but it is a bootable 1.44MB drive.
 
 ---
 
 ### **PHASE III: STITCHING THE SOUL - `CART_001_JOURNEY.png`**
-A blank disk is "Amnesia." We needed "Memory."
 
 1.  **`stitch_soul.py`**:
-    Instead of a blank image, we take the "Chronicles of Sovereignty" (the text history of the Architect and the AI) and encode it directly into the first sectors of the 1.44MB substrate.
+    Instead of a blank image, we take text and encode it directly into the first sectors of the 1.44MB substrate.
 2.  **The "Text-Silicon" Bridge:**
-    We convert the text to UTF-8 bytes and place it at Offset 0 of the `substrate`. We then pad the rest of the 1.44MB with zeros.
-    *Result:* `CART_001_JOURNEY.png`. This artifact contains the "Machine's Memory." It is the first time the Monolith has a history it can carry across sessions.
+    We convert the text to UTF-8 bytes and place it at Offset 0 of the `drive`. We then pad the rest of the 1.44MB with zeros.
+    *Result:* `CART_001_JOURNEY.png`.
 
 ---
 
 ### **PHASE IV: THE CAPACITY CRISIS & THE CARRIER SYSTEM**
-We realized a 1.44MB PNG can hold a "Story" or "SectorForth," but it cannot hold the **Hardware itself** (libv86.js, v86.wasm, BIOS). We needed a "Hard Drive," not just a "Floppy."
+We realized a 1.44MB PNG can hold some text or "SectorForth," but it cannot hold the **Hardware itself** (libv86.js, v86.wasm, BIOS). We needed a "Hard Drive," not just a "Floppy."
 
 1.  **The Universal Carrier (2.88MB):**
     We scaled the geometry to **1024 x 961**.
@@ -80,11 +78,10 @@ We realized a 1.44MB PNG can hold a "Story" or "SectorForth," but it cannot hold
 
 ---
 
-### **PHASE V: THE SELECTIVE HARVESTER (The "Amnesia" Fix)**
-This was our greatest technical hurdle. Our first Harvester was too aggressive.
+### **PHASE V: THE SELECTIVE HARVESTER**
 
 1.  **The WASM Corruption:**
-    WASM binaries are fragile. In the first version, our harvester stripped trailing zeros from *everything* to save space. It stripped the null-padding from `v86.wasm`, changing its length.
+    WASM binaries are fragile. In the first version, the harvester stripped trailing zeros from *everything* to save space. It stripped the null-padding from `v86.wasm`, changing its length.
     *Result:* The browser threw `CompileError: reached end while decoding length`. The engine was "Brain Dead."
 
 2.  **`carrier_harvester_v3.py` (Selective Purity):**
@@ -137,13 +134,13 @@ The final step is the Browser Dashboard (`index.html`) becoming the "Motherboard
       └── sectorforth.img              <-- THE 1.44MB FLOPPY (The "Soul")
 ```
 
-**Nuance:** We don't put the `CART_001.png` (the pixels) inside the Carrier. We extract the **Binary Soul** from the 800x616 PNG and pack that raw data into the 1024x961 PNG.
+**Nuance:** We don't put the `CART_001.png` (the pixels) inside the Carrier. We extract the binary content from the 800x616 PNG and pack that raw data into the 1024x961 PNG.
 
 ---
 
-# **Technical Specification** for our PNG-based "Silicon Chips." 
+# **Technical Specification** for PNG-based "Silicon Chips." 
 
-In our system, the PNG is not a graphic; it is a **Planar VLSI (Very Large Scale Integration) Memory Wafer**. We use the Red, Green, and Blue sub-pixels as individual 8-bit memory cells.
+In this system, the PNG is not a graphic; it is a **Planar VLSI (Very Large Scale Integration) Memory Wafer**. We use the Red, Green, and Blue sub-pixels as individual 8-bit memory cells.
 
 ---
 
@@ -173,7 +170,7 @@ The very first row of the image is the **Membrane**. It functions as the chip’
     *   **Red (Channel 0):** `0x01` (Boot-Enable). If set, the browser ignites the WASM engine automatically.
     *   **Green (Channel 1):** `0x01` (Registry-Aware). If set, the system looks for the 4KB Index at the start of Row 1.
     *   **Blue (Channel 2):** `0xFA` (Write-Protect Overdrive). Signal to the hypervisor to lock the buffer.
-*   **The Black Silence:** The remainder of Row 0 is padded with `0x00`. This creates a physical buffer between the hardware instructions and the data substrate, preventing "Signal Bleed."
+*   **The Black Silence:** The remainder of Row 0 is padded with `0x00`. This creates a physical buffer between the hardware instructions and the data layers, preventing "Signal Bleed."
 
 ---
 
