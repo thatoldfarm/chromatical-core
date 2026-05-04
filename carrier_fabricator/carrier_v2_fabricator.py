@@ -40,8 +40,8 @@ def run_v2_packer():
     # THE BATCH: Carrier V1 + The Linux Seeds
     targets = [
         "CARRIER_STORAGE_v1.png",
-        "MASTER_DNA_SEED_bzImage.png",
-        "MASTER_DNA_SEED_rootfs.cpio.gz.png"
+        "MASTER_DNA_SEED_vmlinuz.png",
+        "MASTER_DNA_SEED_initrd.img.png"
     ]
     
     for filename in targets:
